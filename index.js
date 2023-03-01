@@ -50,7 +50,7 @@ const player = new Player({
 })
 const player2 = new Player ({
     x: 300,
-    y: 0,
+    y: 150,
 })
 animate()
 
