@@ -6,17 +6,27 @@ const c = canvas.getContext('2d')
 // setting 16:9 aspect ratio which should fit on most screens
 canvas.width = 1024
 canvas.height = 576
+gravity = 0.25
 
 class Player {
     constructor (position) {
         // X and Y coordinates of player
         this.position = position
+        // Velocity of player. Physics, yeah!
+        // Defaulted here to falling down.
+        this.velocity = {
+            x: 0,
+            y: 1
+        }
+        // Height & width of player
+        this.height = 100
+        this.width = 100
     }
 
     // Draw player
     draw() {
         c.fillStyle = 'red'
-        c.fillRect(this.position.x, this.position.y, 100, 100)
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 
     // Updates player coordinates
@@ -25,7 +35,12 @@ class Player {
         this.draw()
         // Gravity! Increase y-coordinate (dist from top of screen)
         // so that player falls.
-        this.position.y++
+        this.position.y += this.velocity.y
+
+        // Check that bottom of player has not gone past the bottom of our
+        // game screen. If not, add to the downwards velocity.
+        if (this.position.y + this.height + this.velocity.y < canvas.height) this.velocity.y += gravity
+        else this.velocity.y = 0
     }
 }
 
