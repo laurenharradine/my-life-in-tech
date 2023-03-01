@@ -36,6 +36,7 @@ class Player {
         // Gravity! Increase y-coordinate (dist from top of screen)
         // so that player falls.
         this.position.y += this.velocity.y
+        this.position.x += this.velocity.x
 
         // Check that bottom of player has not gone past the bottom of our
         // game screen. If not, add to the downwards velocity.
@@ -54,12 +55,49 @@ const player2 = new Player ({
     y: 150,
 })
 
+// Object containing keys we are listening for
+const keys = {
+    d: {
+        pressed: false,
+    },
+    a: {
+        pressed: false,
+    }
+}
+
 // Call animate loop
 animate()
 
 // Event Listener for key presses
 window.addEventListener('keydown', (event) => {
-    console.log(event)
+    // console.log(event)
+    switch(event.key) {
+        // Go right
+        case 'd':
+            keys.d.pressed = true
+        break
+        // Go left
+        case 'a':
+            keys.a.pressed = true
+        break
+        // Jump!
+        case 'w':
+            player.velocity.y = -15
+        break
+    }
+})
+
+// So we can 
+window.addEventListener('keyup', (event) => {
+    // console.log(event)
+    switch(event.key) {
+        case 'd':
+            keys.d.pressed = false
+        break
+        case 'a':
+            keys.a.pressed = false
+        break
+    }
 })
 
 // ----------  Functions ---------------
@@ -73,4 +111,8 @@ function animate() {
 
     player.update()
     player2.update()
+
+    player.velocity.x = 0
+    if(keys.d.pressed) player.velocity.x = 1
+    else if (keys.a.pressed) player.velocity.x = -1
 }
