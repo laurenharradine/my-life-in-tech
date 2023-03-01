@@ -8,4 +8,5 @@ canvas.width = 1024
 canvas.height = 576
 
 c.fillStyle = 'white'
-c.fillRect(10, 10, 50, 50)
+// Starts in top left corner and spans canvas width & height
+c.fillRect(0, 0, canvas.width, canvas.height)
