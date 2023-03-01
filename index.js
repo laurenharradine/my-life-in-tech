@@ -8,6 +8,24 @@ canvas.width = 1024
 canvas.height = 576
 gravity = 0.25
 
+class Sprite {
+    constructor({position, imageSrc}) {
+        this.position = position
+        this.image = new Image() // A JS method
+        this.image.src = imageSrc
+    }
+
+    draw() {
+        // Make sure the image has loaded correctly
+        if (!this.image) return
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+
+    update () {
+        this.draw()
+    }
+}
+
 class Player {
     constructor (position) {
         // X and Y coordinates of player
@@ -53,6 +71,14 @@ const player = new Player({
 const player2 = new Player ({
     x: 300,
     y: 150,
+})
+
+const background = new Sprite({
+    position: {
+        x: 0,
+        y: 0
+    },
+    imageSrc: './images/background.png'
 })
 
 // Object containing keys we are listening for
@@ -109,6 +135,7 @@ function animate() {
     // Starts in top left corner and spans canvas width & height
     c.fillRect(0, 0, canvas.width, canvas.height)
 
+    background.update()
     player.update()
     player2.update()
 
