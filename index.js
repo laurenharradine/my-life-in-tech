@@ -135,7 +135,13 @@ function animate() {
     // Starts in top left corner and spans canvas width & height
     c.fillRect(0, 0, canvas.width, canvas.height)
 
+    // Makes sure that background ONLY
+    // is scaled up
+    c.save()
+    c.scale(4, 4)
     background.update()
+    c.restore()
+
     player.update()
     player2.update()
 
