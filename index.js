@@ -6,7 +6,13 @@ const c = canvas.getContext('2d')
 // setting 16:9 aspect ratio which should fit on most screens
 canvas.width = 1024
 canvas.height = 576
-gravity = 0.25
+
+const scaledCanvas = {
+    width: canvas.width / 4,
+    height: canvas.height / 4
+}
+
+const gravity = 0.25
 
 class Sprite {
     constructor({position, imageSrc}) {
@@ -139,6 +145,10 @@ function animate() {
     // is scaled up
     c.save()
     c.scale(4, 4)
+    // Translate background image by height of background image + scaled canvas height
+    // so that we start with the bottom left hand corner of the background
+    // rather than the top left.
+    c.translate(0, -background.image.height + scaledCanvas.height)
     background.update()
     c.restore()
 
