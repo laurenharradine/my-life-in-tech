@@ -7,6 +7,11 @@ const c = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
 
+// Make white game background
 c.fillStyle = 'white'
 // Starts in top left corner and spans canvas width & height
 c.fillRect(0, 0, canvas.width, canvas.height)
+
+// Player
+c.fillStyle = 'red'
+c.fillRect(200, 100, 100, 100)
