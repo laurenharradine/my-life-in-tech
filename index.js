@@ -7,11 +7,30 @@ const c = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
 
+class Player {
+    constructor () {
+        // X and Y coordinates of player
+        this.position = {
+            x: 0,
+            y: 0,
+        }
+    }
 
+    // Draw player
+    draw() {
+        c.fillStyle = 'red'
+        c.fillRect(this.position.x, this.position.y, 100, 100)
+    }
 
-// y-coordinate
-let y = 100
+    // Updates player coordinates
+    update() {
+        // Gravity! Increase y-coordinate (dist from top of screen)
+        // so that player falls.
+        this.position.y++
+    }
+}
 
+const player = new Player()
 animate()
 
 // ----------  Functions ---------------
@@ -23,10 +42,6 @@ function animate() {
     // Starts in top left corner and spans canvas width & height
     c.fillRect(0, 0, canvas.width, canvas.height)
 
-    // Draw player
-    c.fillStyle = 'red'
-    c.fillRect(200, y, 100, 100)
-
-    // Gravity! Increase y-coordinate (dist from top of screen) so player falls.
-    y++
+    player.draw()
+    player.update()
 }
