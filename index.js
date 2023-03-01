@@ -44,6 +44,7 @@ class Player {
     }
 }
 
+// Create our players
 const player = new Player({
     x: 0,
     y: 0,
@@ -52,7 +53,14 @@ const player2 = new Player ({
     x: 300,
     y: 150,
 })
+
+// Call animate loop
 animate()
+
+// Event Listener for key presses
+window.addEventListener('keydown', (event) => {
+    console.log(event)
+})
 
 // ----------  Functions ---------------
 // Calls itself to animate in a loop
