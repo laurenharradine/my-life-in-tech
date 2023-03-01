@@ -8,12 +8,9 @@ canvas.width = 1024
 canvas.height = 576
 
 class Player {
-    constructor () {
+    constructor (position) {
         // X and Y coordinates of player
-        this.position = {
-            x: 0,
-            y: 0,
-        }
+        this.position = position
     }
 
     // Draw player
@@ -24,13 +21,22 @@ class Player {
 
     // Updates player coordinates
     update() {
+        // Call draw() here so we don't need to bog down the code elsewhere
+        this.draw()
         // Gravity! Increase y-coordinate (dist from top of screen)
         // so that player falls.
         this.position.y++
     }
 }
 
-const player = new Player()
+const player = new Player({
+    x: 0,
+    y: 0,
+})
+const player2 = new Player ({
+    x: 300,
+    y: 0,
+})
 animate()
 
 // ----------  Functions ---------------
@@ -42,6 +48,6 @@ function animate() {
     // Starts in top left corner and spans canvas width & height
     c.fillRect(0, 0, canvas.width, canvas.height)
 
-    player.draw()
     player.update()
+    player2.update()
 }
